@@ -12,7 +12,9 @@ import {
   Briefcase,
   ChevronLeft,
   ChevronRight,
-  Maximize2
+  Maximize2,
+  Cpu,
+  HeartPulse
 } from 'lucide-react';
 
 interface Project {
@@ -172,6 +174,55 @@ export default function Portfolio() {
         "/axis-zapier-flow.jpg",
         "/axis-crm-infographic.jpg",
         "/axis-banner.png"
+      ]
+    },
+    {
+      id: 7,
+      title: "AI-Powered CRM & Service Operations Automation",
+      category: "AI Chatbots & CRM Pipelines",
+      problem: "HVAC businesses struggled with slow lead response times, manual technician dispatch, missed follow-ups, and disconnected sales and operations workflows that caused lost revenue and poor customer experience.",
+      solution: "Built an enterprise-grade n8n automation that covers the entire HVAC customer journey — from AI-powered lead capture and qualification to technician dispatch, estimate generation, payment processing, post-service follow-ups, and real-time reporting.",
+      impact: "90% faster response times, 40% increase in conversions, 70% less manual work, and 95% automated follow-ups — running 24/7 with zero manual intervention.",
+      timeSaved: "40+ Hours/Week",
+      technologies: ["n8n", "OpenAI (GPT)", "HubSpot CRM", "Google Maps API", "Google Drive", "Google Calendar", "Gmail", "Slack", "Twilio", "Stripe", "Google Sheets", "QuickBooks"],
+      features: [
+        "Multi-channel lead capture via Website, Facebook Ads, Google Ads, Live Chat & Phone",
+        "AI lead qualification, scoring, and segmentation (Hot / Warm / Cold)",
+        "Smart technician assignment based on ZIP code and availability",
+        "AI-generated estimates, automated emails, SMS confirmations, and Slack alerts",
+        "Invoice generation, Stripe payment processing, and appointment scheduling",
+        "Intelligent follow-up sequences with personalized AI emails and SMS reminders",
+        "Post-service documentation, automated review requests, and KPI dashboard reporting"
+      ],
+      icon: <Cpu className="w-5 h-5 text-cyan-400" />,
+      screenshots: [
+        "/hvac-infographic.jpg",
+        "/hvac-workflow.png",
+        "/hvac-summary.png"
+      ]
+    },
+    {
+      id: 8,
+      title: "AI Multi-Hospital Scheduling & Patient Management",
+      category: "AI Chatbots & CRM Pipelines",
+      problem: "Healthcare providers struggled with manual appointment booking, scheduling conflicts, disconnected patient records, and slow staff notifications — causing delays in patient care and high administrative overhead.",
+      solution: "Built an enterprise-grade n8n automation covering the full patient journey: AI-powered appointment analysis, doctor assignment by specialty, real-time calendar sync, automated billing, medical report generation, and post-visit follow-ups across multiple hospitals and clinics.",
+      impact: "Faster scheduling, fewer conflicts, reduced admin workload, and improved patient satisfaction — running end-to-end with zero manual intervention.",
+      timeSaved: "40+ Hours/Week",
+      technologies: ["n8n", "OpenAI", "PostgreSQL", "Google Calendar", "Microsoft Outlook", "HubSpot", "Gmail", "Twilio", "WhatsApp Cloud API", "Google Docs", "Stripe", "QuickBooks", "Google Sheets"],
+      features: [
+        "AI-powered appointment analysis, specialty routing, and urgency detection",
+        "Multi-hospital and multi-clinic real-time doctor & room availability checks",
+        "Automated patient record creation and HubSpot CRM contact management",
+        "Email, SMS, and WhatsApp notifications for patients and medical staff",
+        "Invoice generation, Stripe payment processing, and QuickBooks sync",
+        "AI-generated medical follow-up messages and patient satisfaction surveys",
+        "Google Sheets and Power BI dashboard updates for KPI tracking"
+      ],
+      icon: <HeartPulse className="w-5 h-5 text-rose-400" />,
+      screenshots: [
+        "/hospital-infographic.png",
+        "/hospital-workflow.png"
       ]
     }
   ];
