@@ -100,14 +100,14 @@ export default function Hero() {
             ATS-Friendly CV
           </a>
           <a
-            href="https://calendar.app.google/dLk41uZgw5eZjSfo9"
+            href="https://calendar.app.google/s8aw7EnS9FAKXbrj6"
             target="_blank"
             rel="noopener noreferrer"
             data-cursor-text="BOOK_CALL"
             className="w-full sm:w-auto flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-850 text-white border border-slate-800 hover:border-slate-700 font-semibold text-sm px-8 py-4 rounded-full transition-all duration-300 cursor-pointer"
           >
             <Calendar size={15} className="text-primary" />
-            Book a Discovery Call
+            Automation Strategy Call
           </a>
         </div>
       </div>

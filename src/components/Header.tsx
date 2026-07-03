@@ -106,7 +106,7 @@ export default function Header() {
             data-cursor-text="BOOK_CALL"
             className="flex items-center gap-2 bg-gradient-to-r from-primary to-secondary hover:from-primary/95 hover:to-secondary/95 text-[#030712] font-semibold text-sm px-6 py-3 rounded-full shadow-glow-primary transition-all duration-300 hover:scale-[1.02] active:scale-95 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
           >
-            Book a Discovery Call
+            Automation Strategy Call
             <ArrowRight size={15} />
           </a>
         </div>
@@ -152,7 +152,7 @@ export default function Header() {
             onClick={() => setIsMobileMenuOpen(false)}
             className="flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-secondary text-[#030712] font-semibold py-4.5 rounded-full shadow-glow-primary hover:scale-[1.01] transition-all mt-3 min-h-[44px]"
           >
-            Book a Discovery Call
+            Automation Strategy Call
             <ArrowRight size={15} />
           </a>
         </div>

@@ -29,7 +29,7 @@ export default function About() {
               <div className="relative bg-slate-950 p-2.5 rounded-3xl border border-slate-800/80 shadow-2xl">
                 <img 
                   src="/portrait.jpg" 
-                  alt="Reale Abil - AI Automation Specialist" 
+                  alt="RA - AI Automation Specialist" 
                   className="w-72 h-72 md:w-80 md:h-80 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500"
                 />
                 
@@ -41,7 +41,7 @@ export default function About() {
               </div>
             </div>
           </div>
-
+ 
           {/* Right: Copy details */}
           <div className="w-full lg:w-3/5 space-y-8">
             <div>
@@ -49,7 +49,7 @@ export default function About() {
                 ABOUT ME
               </span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-display tracking-tight mt-6">
-                Reale Abil
+                RA
               </h2>
               <p className="text-slate-400 mt-2 font-space text-sm md:text-base">
                 AI Automation Engineer & Custom SaaS Developer | Cebu City, Philippines

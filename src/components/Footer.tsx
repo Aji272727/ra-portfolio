@@ -45,7 +45,7 @@ export default function Footer() {
         {/* Right: Copyright & Back to Top */}
         <div className="flex items-center gap-6">
           <span className="text-xs text-slate-500 font-mono">
-            &copy; {new Date().getFullYear()} Reale Abil. All rights reserved.
+            &copy; {new Date().getFullYear()} RA. All rights reserved.
           </span>
           
           <button

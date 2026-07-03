@@ -11,25 +11,25 @@ interface Testimonial {
 export default function Testimonials() {
   const testimonials: Testimonial[] = [
     {
-      name: "Sarah Jenkins",
-      role: "Operations Director",
-      company: "Vanguard Realty Group",
-      text: "RA's n8n workflows completely transformed our sales operations. The 45-second lead response time helped us secure bookings that would have previously slipped away. Simply outstanding engineering.",
-      avatar: "SJ"
+      name: "C. Daarol",
+      role: "Owner",
+      company: "Salt and Snow Bistro",
+      text: "RA built our Online Automated Ordering System and it completely changed the way we handle bistro orders. Customers can order easily, and it sends the details straight to the staff. No more ordering mistakes.",
+      avatar: "/salt-snow-logo.jpg"
     },
     {
-      name: "Dr. Alex Mercer",
-      role: "Founder",
-      company: "Davao Dental & Aesthetic",
-      text: "Implementing the AI voice assistant was a game-changer. It books appointments directly into our CRM flawlessly, freeing up our clinic receptionist to focus entirely on patients inside the building.",
-      avatar: "AM"
+      name: "Ric",
+      role: "COO",
+      company: "Axis Land Solutions",
+      text: "Working with RA transformed how we handle incoming inquiries. Every lead is automatically captured, organized, and assigned to the appropriate field engineer almost instantly. The system has improved operational efficiency and eliminated a large portion of our manual back-office tasks.",
+      avatar: "/axis-logo.jpg"
     },
     {
-      name: "Raymond Miller",
-      role: "Technology Director",
-      company: "CreatorScale Media",
-      text: "We needed a robust partner capable of scaling short-form media output. RA delivered an automated content queue that handles scripts, audio, and YouTube API distribution without failing.",
-      avatar: "RM"
+      name: "Ledevina A.",
+      role: "Owner",
+      company: "Kawayan Cocoa",
+      text: "RA built a fully automated Facebook Messenger solution that manages customer inquiries, qualifies leads, and accepts orders without manual intervention. It has significantly improved our response time while allowing us to serve customers 24/7.",
+      avatar: "/kawayan-cocoa-logo.jpg"
     }
   ];
 
@@ -60,16 +60,24 @@ export default function Testimonials() {
               <Quote className="absolute top-6 right-8 text-slate-800/40 w-10 h-10 group-hover:text-primary/10 transition-colors duration-300" />
               
               <div>
-                <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-8 relative z-10">
+                <p className="text-slate-355 text-sm md:text-base leading-relaxed mb-8 relative z-10">
                   "{t.text}"
                 </p>
               </div>
 
               {/* Author Section */}
               <div className="flex items-center gap-4 mt-auto border-t border-slate-800/50 pt-6">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary text-[#030712] font-space font-bold text-xs flex items-center justify-center shadow-glow-primary">
-                  {t.avatar}
-                </div>
+                {t.avatar.startsWith('/') ? (
+                  <img 
+                    src={t.avatar} 
+                    alt={t.name}
+                    className="w-10 h-10 rounded-full object-cover border border-slate-800 shadow-glow-primary bg-white select-none"
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary text-[#030712] font-space font-bold text-xs flex items-center justify-center shadow-glow-primary">
+                    {t.avatar}
+                  </div>
+                )}
                 <div>
                   <h4 className="text-sm font-bold text-white leading-tight">
                     {t.name}

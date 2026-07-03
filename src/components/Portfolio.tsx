@@ -12,8 +12,7 @@ import {
   Briefcase,
   ChevronLeft,
   ChevronRight,
-  Maximize2,
-  FileText
+  Maximize2
 } from 'lucide-react';
 
 interface Project {
@@ -132,46 +131,47 @@ export default function Portfolio() {
     },
     {
       id: 5,
-      title: "AI Knowledge Base & Facebook Messenger Agent",
-      category: "Customer Support Ops",
-      problem: "Support teams spend hours manually addressing repetitive FAQs and retrieving documents from company files.",
-      solution: "Deployed a Facebook webhook receiver that intercepts customer messages, queries an vector-embedded knowledge assistant, and replies automatically via Facebook Messenger API.",
-      impact: "Automates 85% of standard customer inquiries with instant response times.",
-      timeSaved: "20 Hours/Week",
-      technologies: ["n8n", "OpenAI", "Webhooks", "Facebook Messenger API"],
+      title: "Customer Support Chatbot Automation",
+      category: "AI Chatbots & CRM Pipelines",
+      problem: "Handling customer inquiries, product questions, and orders manually on Facebook Messenger delayed responses and led to missed leads after hours, while manual lead logging in CRM caused administrative bottlenecks.",
+      solution: "Built a Zapier-powered automated answering chatbot using OpenAI (ChatGPT) that qualifies leads, handles product questions, collects order information, and logs contacts directly to HubSpot CRM and Google Sheets.",
+      impact: "Drives instant support responses, auto-qualifies 24/7 lead inquiries, and syncs contacts to CRM instantly.",
+      timeSaved: "25 Hours/Week",
+      technologies: ["Zapier", "OpenAI (ChatGPT)", "Facebook Messenger", "Slack", "Google Sheets", "HubSpot"],
       features: [
-        "Webhook ingestion from Facebook Messenger API",
-        "Intelligent document parsing and vector knowledge search",
-        "Conversational query handling with failover alerts to human agents",
-        "Lead tracking and conversation archiving in relational databases"
+        "AI Decision Engine routing conversation based on client intent",
+        "Automated lead tracking & HubSpot CRM contact creation",
+        "Slack alerts for human agent escalation when custom assistance is needed",
+        "Google Sheets logging for direct conversational archiving"
       ],
       icon: <MessageSquare className="w-5 h-5 text-indigo-400" />,
       screenshots: [
-        "/FB Agent/ChatGPT Image Jun 29, 2026, 02_45_41 PM.png",
-        "/FB Agent/Screenshot 2026-06-19 164828.png",
-        "/FB Agent/Screenshot 2026-06-19 175636.png",
-        "/FB Agent/Screenshot 2026-06-19 180331.png",
-        "/FB Agent/Screenshot 2026-06-19 180424.png"
+        "/kawayan-chat-preview.jpg",
+        "/kawayan-infographic.png",
+        "/kawayan-zapier-flow.png"
       ]
     },
     {
       id: 6,
-      title: "Telegram Blog Writing AI Agent",
-      category: "AI Agents & Copywriting",
-      problem: "Writing tailored blog content matching user preferences and target keywords requires extensive research and formatting, slowing down publishing volume.",
-      solution: "Built a conversational Telegram AI Agent using n8n and OpenAI. The bot takes prompts, fetches stored keywords and preference settings from database records, runs them through a Tools Agent with buffer memory, and returns formatted drafts to Telegram.",
-      impact: "Reduces copy curation cycle from 45 minutes to 30 seconds per article.",
-      timeSaved: "12 Hours/Week",
-      technologies: ["n8n", "OpenAI API", "Telegram API", "PostgreSQL", "Window Buffer Memory"],
+      title: "CRM & Pipeline Automation Management",
+      category: "CRM & Workflow Pipelines",
+      problem: "Manual follow-ups, slow lead mapping, and scattered customer communication channels caused admin delays in assigning survey engineers to property sites.",
+      solution: "Built a fully automated Zapier-powered CRM and pipeline management system using HubSpot. Leads are captured from web forms, Facebook Ads, and phone calls, validated, enriched, added to the correct pipeline stage, and followed up automatically via Gmail and Slack.",
+      impact: "Speeds up field deployment times by 5x, reduces manual work by 80%, and keeps customer records 100% synchronized in real time.",
+      timeSaved: "20 Hours/Week",
+      technologies: ["Zapier", "HubSpot CRM", "Google Sheets", "Gmail", "Slack", "Calendly"],
       features: [
-        "Telegram webhook interface for conversational agent trigger",
-        "Parallel database retrieval of style preferences and keyword targets",
-        "n8n merge nodes executing structural JSON compilation",
-        "OpenAI Tools Agent with memory buffers and custom response schemas"
+        "Multi-source lead capture from web forms, Facebook Ads, and phone calls",
+        "Automated lead validation, enrichment, and HubSpot CRM contact creation",
+        "AI-powered lead qualification and scoring with OpenAI (ChatGPT)",
+        "Automated follow-up emails, task creation, and Slack team notifications",
+        "Real-time Google Sheets reporting and weekly pipeline performance reports"
       ],
-      icon: <FileText className="w-5 h-5 text-amber-400" />,
+      icon: <Briefcase className="w-5 h-5 text-amber-400" />,
       screenshots: [
-        "/blog-agent.png"
+        "/axis-zapier-flow.jpg",
+        "/axis-crm-infographic.jpg",
+        "/axis-banner.png"
       ]
     }
   ];

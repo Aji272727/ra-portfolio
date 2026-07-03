@@ -10,7 +10,6 @@ import Process from './components/Process';
 import Testimonials from './components/Testimonials';
 import About from './components/About';
 import Contact from './components/Contact';
-import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import InteractiveBackground from './components/InteractiveBackground';
 import CustomCursor from './components/CustomCursor';
@@ -40,7 +39,6 @@ export default function App() {
         <Testimonials />
         <About />
         <Contact />
-        <FinalCTA />
       </main>
       
       {/* Footer */}

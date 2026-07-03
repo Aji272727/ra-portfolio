@@ -17,14 +17,14 @@ export default function FinalCTA() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="https://calendar.app.google/dLk41uZgw5eZjSfo9"
+            href="https://calendar.app.google/s8aw7EnS9FAKXbrj6"
             target="_blank"
             rel="noopener noreferrer"
             data-cursor-text="BOOK_CALL"
             className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-secondary text-[#030712] font-semibold text-sm px-8 py-4 rounded-full shadow-glow-primary hover:scale-[1.02] active:scale-95 transition-all duration-300 cursor-pointer"
           >
             <Calendar size={15} />
-            Book a Discovery Call
+            Automation Strategy Call
           </a>
           <a
             href="#portfolio"

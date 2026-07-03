@@ -1,55 +1,15 @@
-import { useState } from 'react';
 import { 
   Mail, 
   Linkedin, 
   Github, 
   ExternalLink, 
   Calendar,
-  Send,
-  Loader2,
-  Terminal,
   Phone,
-  MapPin
+  MapPin,
+  ArrowRight
 } from 'lucide-react';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'simulating' | 'success'>('idle');
-  const [logMessages, setLogMessages] = useState<string[]>([]);
-
-  const addLog = (msg: string, delay: number) => {
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        setLogMessages((prev) => [...prev, msg]);
-        resolve();
-      }, delay);
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email) return;
-
-    setStatus('submitting');
-    // Simulate typical API response time
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    
-    setStatus('simulating');
-    setLogMessages([]);
-    
-    await addLog("⚡ INBOUND_WEBHOOK: Trigger received from portfolio_form", 200);
-    await addLog(`📡 PAYLOAD: { name: "${formData.name}", company: "${formData.company || 'Unknown'}" }`, 400);
-    await addLog("🤖 GPT_AGENT: Summarizing inquiry and classifying urgency...", 600);
-    await addLog("📂 HUBSPOT_CRM: Creating lead record & scheduling tasks...", 500);
-    await addLog("📨 MAILGUN_API: Dispatching automated confirmation to sender...", 500);
-    await addLog("🔔 SLACK_NOTIFY: Rep alerted (Vibration triggered)", 400);
-    await addLog("✨ SYSTEM_STATUS: Complete (Status 200 OK)", 300);
-
-    setTimeout(() => {
-      setStatus('success');
-    }, 600);
-  };
-
   const socialLinks = [
     { name: 'Email', value: 'raabiltechva@gmail.com', href: 'mailto:raabiltechva@gmail.com', icon: <Mail size={16} /> },
     { name: 'Phone', value: '+63 909 2859 510', href: 'tel:+639092859510', icon: <Phone size={16} /> },
@@ -60,32 +20,36 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-24 relative z-10 border-t border-slate-900 bg-[#030712]/40">
+    <section id="contact" className="py-24 relative z-10 border-t border-slate-900 bg-[#030712]/40 overflow-hidden">
+      {/* Background glow highlights */}
+      <div className="absolute top-1/2 right-0 w-[400px] h-[300px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
+
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="flex flex-col lg:flex-row gap-16 items-stretch">
-          {/* Left Side: Contact details */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-between space-y-8">
+        <div className="flex flex-col lg:flex-row gap-16 items-center">
+          
+          {/* Left Side: Contact details, Title & Social Cards */}
+          <div className="w-full lg:w-1/2 flex flex-col space-y-8">
             <div className="space-y-6">
               <span className="text-xs font-semibold text-primary tracking-widest font-space uppercase bg-primary/10 px-3.5 py-1.5 rounded-full border border-primary/20">
                 GET IN TOUCH
               </span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-display tracking-tight mt-6">
-                Let's Automate Your Business Processes
+                Start Automating Your Workflows
               </h2>
-              <p className="text-slate-400 text-base md:text-lg leading-relaxed">
-                Ready to build intelligent systems, scale lead qualification, and eliminate manual work? Let's discuss your workflows and design a custom tech strategy.
+              <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+                Have processes you want to automate? Connect with me directly on any of the channels below, or book a strategy session using the scheduling panel.
               </p>
             </div>
 
-            {/* Social channels */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+            {/* Social channels grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {socialLinks.map((link, i) => (
                 <a
                   key={i}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-slate-900/50 hover:bg-slate-900 border border-slate-850 hover:border-slate-700 px-5 py-4 rounded-xl transition-all duration-200"
+                  className="flex items-center gap-3 bg-slate-900/50 hover:bg-slate-900 border border-slate-855 hover:border-slate-700 px-5 py-4 rounded-xl transition-all duration-200"
                 >
                   <span className="p-2 rounded-lg bg-slate-950 text-slate-400 border border-slate-900">
                     {link.icon}
@@ -97,141 +61,65 @@ export default function Contact() {
                 </a>
               ))}
             </div>
-
-            {/* Google Calendar Book Meeting */}
-            <div className="bg-[#0b0f19]/30 border border-slate-850 p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div>
-                <h4 className="text-sm font-bold text-white font-display">Schedule a discovery call</h4>
-                <p className="text-xs text-slate-400 mt-1">Book a free 15-minute scoping call on Google Calendar.</p>
-              </div>
-              <a
-                href="https://calendar.app.google/dLk41uZgw5eZjSfo9"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-slate-900 border border-slate-800 text-white hover:text-primary hover:border-slate-700 px-5 py-2.5 rounded-full text-xs font-semibold font-space transition-colors whitespace-nowrap"
-              >
-                <Calendar size={14} className="text-primary" />
-                Open Scheduler
-              </a>
-            </div>
           </div>
 
-          {/* Right Side: Interactive Form panel */}
-          <div className="w-full lg:w-1/2">
-            <div className="glass-panel border-slate-800/80 p-8 rounded-3xl h-full flex flex-col justify-between shadow-2xl relative overflow-hidden">
+          {/* Right Side: High-End CTA Panel "Ready to Automate Your Business?" */}
+          <div className="w-full lg:w-1/2 self-stretch flex items-center justify-center">
+            <div className="glass-panel border-slate-800/80 p-8 md:p-12 rounded-3xl w-full flex flex-col justify-between shadow-2xl relative overflow-hidden bg-[#0b0f19]/35 group min-h-[400px]">
               
-              {status !== 'simulating' && status !== 'success' ? (
-                /* Contact Form view */
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold font-space text-slate-400 uppercase">Your Name</label>
-                      <input 
-                        type="text" 
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="John Doe"
-                        className="w-full bg-slate-950/80 border border-slate-800/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/80 transition-colors"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold font-space text-slate-400 uppercase">Work Email</label>
-                      <input 
-                        type="email" 
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="john@company.com"
-                        className="w-full bg-slate-950/80 border border-slate-800/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/80 transition-colors"
-                      />
-                    </div>
-                  </div>
+              {/* Subtle background details inside card */}
+              <div className="absolute inset-0 bg-dot-grid opacity-5 pointer-events-none" />
+              <div className="absolute -top-20 -right-20 w-52 h-52 bg-gradient-to-br from-primary/10 to-secondary/10 blur-3xl rounded-full pointer-events-none" />
 
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold font-space text-slate-400 uppercase">Company Name</label>
-                    <input 
-                      type="text" 
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      placeholder="Acme Corp"
-                      className="w-full bg-slate-950/80 border border-slate-800/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/80 transition-colors"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold font-space text-slate-400 uppercase">How can we automate your business?</label>
-                    <textarea 
-                      rows={4}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Briefly describe the tasks or platforms you want to automate..."
-                      className="w-full bg-slate-950/80 border border-slate-800/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/80 transition-colors resize-none"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={status === 'submitting'}
-                    className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-secondary text-[#030712] font-semibold py-3.5 rounded-full shadow-glow-primary hover:scale-[1.01] active:scale-95 transition-all disabled:opacity-50"
-                  >
-                    {status === 'submitting' ? (
-                      <>
-                        <Loader2 size={16} className="animate-spin" />
-                        Connecting to API...
-                      </>
-                    ) : (
-                      <>
-                        <Send size={16} />
-                        Submit Request
-                      </>
-                    )}
-                  </button>
-                </form>
-              ) : status === 'simulating' ? (
-                /* Interactive Webhook logs simulation */
-                <div className="flex-grow flex flex-col justify-between h-full bg-slate-950 p-6 rounded-2xl border border-slate-850 font-mono text-[11px] text-slate-300">
-                  <div className="space-y-3.5">
-                    <div className="flex items-center gap-2 border-b border-slate-850 pb-2 mb-3">
-                      <Terminal size={14} className="text-primary animate-pulse" />
-                      <span className="text-slate-400 font-bold">PORTFOLIO_DISPATCHER_LOG</span>
-                    </div>
-                    {logMessages.map((log, idx) => (
-                      <div key={idx} className="animate-in fade-in slide-in-from-left-2 duration-200">
-                        {log}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-6 flex items-center gap-2 justify-center text-slate-500 animate-pulse text-[10px]">
-                    <Loader2 size={12} className="animate-spin" />
-                    Executing live pipeline mock...
-                  </div>
+              {/* Status Header Bar */}
+              <div className="flex items-center justify-between text-[9px] font-mono text-slate-500 uppercase tracking-widest select-none pb-4 border-b border-slate-900/60 mb-6">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  <span>[SYS_ROUTING_DIRECT]</span>
                 </div>
-              ) : (
-                /* Success view */
-                <div className="flex-grow flex flex-col items-center justify-center text-center p-8 space-y-6">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shadow-glow-primary">
-                    <Send className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold font-display text-white">Pipeline Triggered Successfully!</h3>
-                    <p className="text-slate-400 text-sm mt-3 leading-relaxed max-w-sm mx-auto">
-                      Thank you for submitting! The automated routing script has sent your message to Reale Abil. You should receive an email confirmation shortly.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setStatus('idle');
-                      setFormData({ name: '', email: '', company: '', message: '' });
-                    }}
-                    className="text-xs font-bold text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700 px-6 py-2.5 rounded-full transition-colors font-space"
-                  >
-                    Send Another Message
-                  </button>
-                </div>
-              )}
+                <span className="text-[8px] bg-slate-950 px-2 py-0.5 rounded border border-slate-850">ACTIVE_ROUTE</span>
+              </div>
+
+              <div className="space-y-6 flex-grow flex flex-col justify-center">
+                <h3 className="text-3xl md:text-4xl font-extrabold font-display text-white leading-[1.2] tracking-tight">
+                  Ready to Automate <br className="hidden md:inline" />
+                  Your Business?
+                </h3>
+                
+                <p className="text-slate-400 text-sm md:text-base leading-relaxed max-w-md">
+                  Let's build systems that save hours of manual operations, sync custom databases, and scale operations automatically.
+                </p>
+              </div>
+
+              {/* Button group */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-slate-900/50 mt-8">
+                <a
+                  href="https://calendar.app.google/s8aw7EnS9FAKXbrj6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor-text="BOOK_CALL"
+                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-secondary text-[#030712] font-semibold text-sm py-3.5 px-5 rounded-full shadow-glow-primary hover:scale-[1.01] active:scale-95 transition-all duration-300 cursor-pointer flex-[1.6] whitespace-nowrap font-space tracking-wide text-center"
+                >
+                  <Calendar size={14} />
+                  Automation Strategy Call
+                </a>
+                <a
+                  href="#portfolio"
+                  className="flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-900 text-white border border-slate-850 hover:border-slate-700 font-semibold text-sm py-3.5 px-5 rounded-full hover:scale-[1.01] active:scale-95 transition-all duration-300 flex-1 whitespace-nowrap font-space tracking-wide text-center"
+                >
+                  View Portfolio
+                  <ArrowRight size={14} className="text-slate-500" />
+                </a>
+              </div>
+
+              {/* Corner Cyberpunk brackets decorations */}
+              <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-slate-800 pointer-events-none opacity-40 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-slate-800 pointer-events-none opacity-40 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-slate-800 pointer-events-none opacity-40 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-slate-800 pointer-events-none opacity-40 group-hover:opacity-100 transition-opacity" />
             </div>
           </div>
+          
         </div>
       </div>
     </section>
