@@ -15,8 +15,7 @@ import {
   Maximize2,
   Cpu,
   HeartPulse,
-  Car,
-  Play
+  Car
 } from 'lucide-react';
 
 interface Project {
@@ -39,7 +38,6 @@ export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
-  const [showVideo, setShowVideo] = useState(false);
 
   const getYoutubeEmbedUrl = (url: string) => {
     const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]{11})/);
@@ -281,20 +279,23 @@ export default function Portfolio() {
   const handleOpenProject = (proj: Project) => {
     setSelectedProject(proj);
     setCurrentSlide(0);
-    setShowVideo(!!proj.videoUrl);
   };
 
   const handlePrevSlide = () => {
     if (!selectedProject) return;
+    const hasVideo = !!selectedProject.videoUrl;
+    const totalSlides = hasVideo ? selectedProject.screenshots.length + 1 : selectedProject.screenshots.length;
     setCurrentSlide((prev) => 
-      prev === 0 ? selectedProject.screenshots.length - 1 : prev - 1
+      prev === 0 ? totalSlides - 1 : prev - 1
     );
   };
 
   const handleNextSlide = () => {
     if (!selectedProject) return;
+    const hasVideo = !!selectedProject.videoUrl;
+    const totalSlides = hasVideo ? selectedProject.screenshots.length + 1 : selectedProject.screenshots.length;
     setCurrentSlide((prev) => 
-      prev === selectedProject.screenshots.length - 1 ? 0 : prev + 1
+      prev === totalSlides - 1 ? 0 : prev + 1
     );
   };
 
@@ -444,27 +445,53 @@ export default function Portfolio() {
               
               {/* Carousel Section */}
               <div className="relative bg-slate-950 p-2 rounded-2xl border border-slate-850 group/carousel">
-                {/* Images slide */}
-                <div 
-                  data-cursor-text="PREVIEW_CANVAS"
-                  onClick={() => setLightboxImage(selectedProject.screenshots[currentSlide])}
-                  className="h-72 sm:h-96 w-full relative rounded-xl overflow-hidden flex items-center justify-center cursor-zoom-in"
-                >
-                  <img 
-                    src={encodeURI(selectedProject.screenshots[currentSlide])} 
-                    alt={`${selectedProject.title} workflow ${currentSlide + 1}`} 
-                    className="w-full h-full object-contain"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent pointer-events-none" />
-                  
-                  {/* Floating count indicator */}
-                  <span className="absolute bottom-4 right-4 bg-slate-900/90 border border-slate-800/80 px-2.5 py-1 rounded text-xs font-mono text-slate-350">
-                    {currentSlide + 1} / {selectedProject.screenshots.length}
-                  </span>
-                </div>
+                {(() => {
+                  const hasVideo = !!selectedProject.videoUrl;
+                  const isVideoSlide = hasVideo && currentSlide === 0;
+                  const screenshotIndex = hasVideo ? currentSlide - 1 : currentSlide;
+                  const totalSlides = hasVideo ? selectedProject.screenshots.length + 1 : selectedProject.screenshots.length;
+
+                  if (isVideoSlide && selectedProject.videoUrl) {
+                    return (
+                      <div className="h-72 sm:h-96 w-full relative rounded-xl overflow-hidden border border-slate-800 bg-black">
+                        <iframe
+                          src={getYoutubeEmbedUrl(selectedProject.videoUrl)}
+                          className="w-full h-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          title="Project Demo Video"
+                        />
+                        {/* Floating count indicator */}
+                        <span className="absolute bottom-4 right-4 bg-slate-900/90 border border-slate-800/80 px-2.5 py-1 rounded text-xs font-mono text-slate-350">
+                          {currentSlide + 1} / {totalSlides} (Demo Video)
+                        </span>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <div 
+                      data-cursor-text="PREVIEW_CANVAS"
+                      onClick={() => setLightboxImage(selectedProject.screenshots[screenshotIndex])}
+                      className="h-72 sm:h-96 w-full relative rounded-xl overflow-hidden flex items-center justify-center cursor-zoom-in"
+                    >
+                      <img 
+                        src={encodeURI(selectedProject.screenshots[screenshotIndex])} 
+                        alt={`${selectedProject.title} workflow ${screenshotIndex + 1}`} 
+                        className="w-full h-full object-contain"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent pointer-events-none" />
+                      
+                      {/* Floating count indicator */}
+                      <span className="absolute bottom-4 right-4 bg-slate-900/90 border border-slate-800/80 px-2.5 py-1 rounded text-xs font-mono text-slate-350">
+                        {currentSlide + 1} / {totalSlides}
+                      </span>
+                    </div>
+                  );
+                })()}
 
                 {/* Left/Right Buttons */}
-                {selectedProject.screenshots.length > 1 && (
+                {((selectedProject.videoUrl ? selectedProject.screenshots.length + 1 : selectedProject.screenshots.length) > 1) && (
                   <>
                     <button
                       onClick={handlePrevSlide}
@@ -545,48 +572,13 @@ export default function Portfolio() {
                 </div>
               )}
 
-              {/* YouTube Video Embed */}
-              {selectedProject.videoUrl && (
-                <div>
-                  <h4 className="text-sm font-bold font-space uppercase text-slate-400 mb-3">📹 Live Demo</h4>
-                  {showVideo ? (
-                    <div className="relative w-full rounded-xl overflow-hidden border border-slate-800" style={{paddingTop: '56.25%'}}>
-                      <iframe
-                        src={getYoutubeEmbedUrl(selectedProject.videoUrl)}
-                        className="absolute inset-0 w-full h-full"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        title="Project Demo Video"
-                      />
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => setShowVideo(true)}
-                      className="w-full h-40 bg-slate-900 border border-slate-800 rounded-xl flex flex-col items-center justify-center gap-3 hover:border-primary/50 hover:bg-primary/5 transition-all group/video"
-                    >
-                      <div className="w-14 h-14 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center group-hover/video:bg-primary/20 group-hover/video:scale-110 transition-all">
-                        <Play size={22} className="text-primary ml-1" />
-                      </div>
-                      <span className="text-sm font-bold text-slate-300 group-hover/video:text-white transition-colors">Watch Full Demo</span>
-                      <span className="text-xs text-slate-500 font-mono">Click to load video</span>
-                    </button>
-                  )}
-                </div>
-              )}
+
             </div>
 
             {/* Modal Footer CTA */}
             <div className="p-6 md:px-8 bg-slate-950/60 border-t border-slate-800/80 flex items-center justify-between gap-3 flex-wrap">
               <span className="text-xs text-slate-400">Ready to build something similar?</span>
               <div className="flex items-center gap-3">
-                {selectedProject.videoUrl && !showVideo && (
-                  <button
-                    onClick={() => setShowVideo(true)}
-                    className="flex items-center gap-2 border border-slate-700 hover:border-primary/50 text-slate-300 hover:text-primary font-semibold text-xs px-4 py-2.5 rounded-full transition-all"
-                  >
-                    <Play size={13} /> Watch Demo
-                  </button>
-                )}
                 <a
                   href="#contact"
                   onClick={() => setSelectedProject(null)}
