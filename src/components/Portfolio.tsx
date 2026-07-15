@@ -14,7 +14,9 @@ import {
   ChevronRight,
   Maximize2,
   Cpu,
-  HeartPulse
+  HeartPulse,
+  Car,
+  Play
 } from 'lucide-react';
 
 interface Project {
@@ -29,12 +31,20 @@ interface Project {
   features: string[];
   icon: React.ReactNode;
   screenshots: string[];
+  videoUrl?: string;
+  price?: string;
 }
 
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [showVideo, setShowVideo] = useState(false);
+
+  const getYoutubeEmbedUrl = (url: string) => {
+    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]{11})/);
+    return match ? `https://www.youtube.com/embed/${match[1]}?autoplay=1&rel=0` : url;
+  };
 
   const projects: Project[] = [
     {
@@ -224,12 +234,43 @@ export default function Portfolio() {
         "/hospital-infographic.png",
         "/hospital-workflow.png"
       ]
+    },
+    {
+      id: 9,
+      title: "Car Rental Business Automation",
+      category: "Full-Stack Business Automation",
+      problem: "Traditional car rental businesses spend significant time manually managing customer inquiries, vehicle availability, bookings, rental agreements, payment collection, fleet tracking, maintenance reminders, and accounting updates — creating high administrative overhead and a poor customer experience.",
+      solution: "Built a full-stack car rental automation suite combining a custom booking portal, admin dashboard, GoHighLevel CRM, AI receptionist, n8n orchestration, and Stripe payments. Every stage from lead to vehicle return is handled automatically with zero manual intervention.",
+      impact: "Reduced admin workload by 80%, faster booking and onboarding, automated payment collection, and real-time business analytics — scalable for any growing rental business.",
+      timeSaved: "40+ Hours/Week",
+      technologies: ["GoHighLevel CRM", "n8n", "Stripe API", "QuickBooks API", "Google Reviews API", "Webhook Integrations", "AI Chat Assistant", "Custom Admin Dashboard", "Responsive Booking Portal"],
+      features: [
+        "Custom customer-facing booking portal with live vehicle availability",
+        "Admin dashboard: fleet, bookings, contracts, damage reports, maintenance & accounting",
+        "GoHighLevel CRM pipeline: Lead → Inquiry → Booked → Active Rental → Returned → Completed",
+        "AI Receptionist for automated customer inquiries and booking confirmations",
+        "Digital rental agreements with e-signature and automated dispatch",
+        "Stripe payment processing with deposit management and invoice automation",
+        "Google Review automation and QuickBooks accounting sync",
+        "n8n workflow orchestration connecting all systems end-to-end"
+      ],
+      icon: <Car className="w-5 h-5 text-sky-400" />,
+      price: "Starting at $12,000 — includes custom booking portal, admin dashboard, GoHighLevel CRM, AI Receptionist, n8n orchestration, Stripe integration, digital contracts, damage reports, maintenance tracking, Google Review automation, accounting sync, reporting dashboard, and CRM pipelines. Monthly retainer from $500–$5,000/month depending on scope.",
+      videoUrl: "https://youtu.be/xFYuEyPg4gg",
+      screenshots: [
+        "/crba-public-page.png",
+        "/crba-dashboard.png",
+        "/crba-bookings.png",
+        "/crba-contracts.png",
+        "/crba-accounting.png"
+      ]
     }
   ];
 
   const handleOpenProject = (proj: Project) => {
     setSelectedProject(proj);
     setCurrentSlide(0);
+    setShowVideo(false);
   };
 
   const handlePrevSlide = () => {
@@ -484,18 +525,65 @@ export default function Portfolio() {
                   ))}
                 </ul>
               </div>
+
+              {/* Pricing Info */}
+              {selectedProject.price && (
+                <div className="bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 rounded-xl p-5">
+                  <h4 className="text-sm font-bold font-space uppercase text-primary mb-1">💼 Package Pricing</h4>
+                  <p className="text-slate-300 text-sm leading-relaxed">{selectedProject.price}</p>
+                </div>
+              )}
+
+              {/* YouTube Video Embed */}
+              {selectedProject.videoUrl && (
+                <div>
+                  <h4 className="text-sm font-bold font-space uppercase text-slate-400 mb-3">📹 Live Demo</h4>
+                  {showVideo ? (
+                    <div className="relative w-full rounded-xl overflow-hidden border border-slate-800" style={{paddingTop: '56.25%'}}>
+                      <iframe
+                        src={getYoutubeEmbedUrl(selectedProject.videoUrl)}
+                        className="absolute inset-0 w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title="Project Demo Video"
+                      />
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setShowVideo(true)}
+                      className="w-full h-40 bg-slate-900 border border-slate-800 rounded-xl flex flex-col items-center justify-center gap-3 hover:border-primary/50 hover:bg-primary/5 transition-all group/video"
+                    >
+                      <div className="w-14 h-14 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center group-hover/video:bg-primary/20 group-hover/video:scale-110 transition-all">
+                        <Play size={22} className="text-primary ml-1" />
+                      </div>
+                      <span className="text-sm font-bold text-slate-300 group-hover/video:text-white transition-colors">Watch Full Demo</span>
+                      <span className="text-xs text-slate-500 font-mono">Click to load video</span>
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Modal Footer CTA */}
-            <div className="p-6 md:px-8 bg-slate-950/60 border-t border-slate-800/80 flex items-center justify-between">
+            <div className="p-6 md:px-8 bg-slate-950/60 border-t border-slate-800/80 flex items-center justify-between gap-3 flex-wrap">
               <span className="text-xs text-slate-400">Ready to build something similar?</span>
-              <a
-                href="#contact"
-                onClick={() => setSelectedProject(null)}
-                className="bg-gradient-to-r from-primary to-secondary text-[#030712] font-semibold text-xs px-5 py-2.5 rounded-full shadow-glow-primary hover:scale-[1.02] active:scale-95 transition-all animate-pulse"
-              >
-                Schedule Consultation
-              </a>
+              <div className="flex items-center gap-3">
+                {selectedProject.videoUrl && !showVideo && (
+                  <button
+                    onClick={() => setShowVideo(true)}
+                    className="flex items-center gap-2 border border-slate-700 hover:border-primary/50 text-slate-300 hover:text-primary font-semibold text-xs px-4 py-2.5 rounded-full transition-all"
+                  >
+                    <Play size={13} /> Watch Demo
+                  </button>
+                )}
+                <a
+                  href="#contact"
+                  onClick={() => setSelectedProject(null)}
+                  className="bg-gradient-to-r from-primary to-secondary text-[#030712] font-semibold text-xs px-5 py-2.5 rounded-full shadow-glow-primary hover:scale-[1.02] active:scale-95 transition-all"
+                >
+                  Schedule Consultation
+                </a>
+              </div>
             </div>
           </div>
         </div>
