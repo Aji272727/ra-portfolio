@@ -48,6 +48,47 @@ export default function Portfolio() {
 
   const projects: Project[] = [
     {
+      id: 9,
+      title: "Car Rental Business Automation",
+      category: "Full-Stack Business Automation",
+      problem: "Traditional car rental businesses spend significant time manually managing customer inquiries, vehicle availability, bookings, rental agreements, payment collection, fleet tracking, maintenance reminders, and accounting updates — creating high administrative overhead and a poor customer experience.",
+      solution: "Built a full-stack car rental automation suite combining a custom booking portal, admin dashboard, GoHighLevel CRM, AI receptionist, n8n orchestration, and Stripe payments. Every stage from lead to vehicle return is handled automatically with zero manual intervention.",
+      impact: "Reduced admin workload by 80%, faster booking and onboarding, automated payment collection, and real-time business analytics — scalable for any growing rental business.",
+      timeSaved: "40+ Hours/Week",
+      technologies: ["GoHighLevel CRM", "n8n", "Stripe API", "QuickBooks API", "Google Reviews API", "Webhook Integrations", "AI Chat Assistant", "Custom Admin Dashboard", "Responsive Booking Portal"],
+      features: [
+        "Custom customer-facing booking portal with live vehicle availability",
+        "Admin dashboard: fleet, bookings, contracts, damage reports, maintenance & accounting",
+        "GoHighLevel CRM pipeline: Lead → Inquiry → Booked → Active Rental → Returned → Completed",
+        "AI Receptionist for automated customer inquiries and booking confirmations",
+        "Digital rental agreements with e-signature and automated dispatch",
+        "Stripe payment processing with deposit management and invoice automation",
+        "Google Review automation and QuickBooks accounting sync",
+        "n8n workflow orchestration connecting all systems end-to-end"
+      ],
+      icon: <Car className="w-5 h-5 text-sky-400" />,
+      price: "Starting at $12,000 — includes custom booking portal, admin dashboard, GoHighLevel CRM, AI Receptionist, n8n orchestration, Stripe integration, digital contracts, damage reports, maintenance tracking, Google Review automation, accounting sync, reporting dashboard, and CRM pipelines. Monthly retainer from $500–$5,000/month depending on scope.",
+      videoUrl: "https://youtu.be/xFYuEyPg4gg",
+      screenshots: [
+        "/crba-infographic.jpg",
+        "/crba-public-page.png",
+        "/crba-dashboard.png",
+        "/crba-bookings.png",
+        "/crba-fleet.png",
+        "/crba-customers.png",
+        "/crba-contracts.png",
+        "/crba-damage-reports.png",
+        "/crba-maintenance.png",
+        "/crba-crm-pipeline.png",
+        "/crba-accounting.png",
+        "/crba-settings.png",
+        "/crba-n8n-workflow.png",
+        "/crba-ghl-new-booking.png",
+        "/crba-ghl-return.png",
+        "/crba-ghl-opportunities.png"
+      ]
+    },
+    {
       id: 1,
       title: "AI Voice Receptionist & Appointment System",
       category: "Voice AI & Scheduling",
@@ -234,53 +275,13 @@ export default function Portfolio() {
         "/hospital-infographic.png",
         "/hospital-workflow.png"
       ]
-    },
-    {
-      id: 9,
-      title: "Car Rental Business Automation",
-      category: "Full-Stack Business Automation",
-      problem: "Traditional car rental businesses spend significant time manually managing customer inquiries, vehicle availability, bookings, rental agreements, payment collection, fleet tracking, maintenance reminders, and accounting updates — creating high administrative overhead and a poor customer experience.",
-      solution: "Built a full-stack car rental automation suite combining a custom booking portal, admin dashboard, GoHighLevel CRM, AI receptionist, n8n orchestration, and Stripe payments. Every stage from lead to vehicle return is handled automatically with zero manual intervention.",
-      impact: "Reduced admin workload by 80%, faster booking and onboarding, automated payment collection, and real-time business analytics — scalable for any growing rental business.",
-      timeSaved: "40+ Hours/Week",
-      technologies: ["GoHighLevel CRM", "n8n", "Stripe API", "QuickBooks API", "Google Reviews API", "Webhook Integrations", "AI Chat Assistant", "Custom Admin Dashboard", "Responsive Booking Portal"],
-      features: [
-        "Custom customer-facing booking portal with live vehicle availability",
-        "Admin dashboard: fleet, bookings, contracts, damage reports, maintenance & accounting",
-        "GoHighLevel CRM pipeline: Lead → Inquiry → Booked → Active Rental → Returned → Completed",
-        "AI Receptionist for automated customer inquiries and booking confirmations",
-        "Digital rental agreements with e-signature and automated dispatch",
-        "Stripe payment processing with deposit management and invoice automation",
-        "Google Review automation and QuickBooks accounting sync",
-        "n8n workflow orchestration connecting all systems end-to-end"
-      ],
-      icon: <Car className="w-5 h-5 text-sky-400" />,
-      price: "Starting at $12,000 — includes custom booking portal, admin dashboard, GoHighLevel CRM, AI Receptionist, n8n orchestration, Stripe integration, digital contracts, damage reports, maintenance tracking, Google Review automation, accounting sync, reporting dashboard, and CRM pipelines. Monthly retainer from $500–$5,000/month depending on scope.",
-      videoUrl: "https://youtu.be/xFYuEyPg4gg",
-      screenshots: [
-        "/crba-public-page.png",
-        "/crba-dashboard.png",
-        "/crba-bookings.png",
-        "/crba-contracts.png",
-        "/crba-accounting.png",
-        "/crba-admin-dashboard.png",
-        "/crba-fleet.png",
-        "/crba-customers.png",
-        "/crba-damage-reports.png",
-        "/crba-maintenance.png",
-        "/crba-crm-pipeline.png",
-        "/crba-settings.png",
-        "/crba-n8n-workflow.png",
-        "/crba-ghl-new-booking.png",
-        "/crba-ghl-return.png"
-      ]
     }
   ];
 
   const handleOpenProject = (proj: Project) => {
     setSelectedProject(proj);
     setCurrentSlide(0);
-    setShowVideo(false);
+    setShowVideo(!!proj.videoUrl);
   };
 
   const handlePrevSlide = () => {
