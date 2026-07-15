@@ -262,7 +262,17 @@ export default function Portfolio() {
         "/crba-dashboard.png",
         "/crba-bookings.png",
         "/crba-contracts.png",
-        "/crba-accounting.png"
+        "/crba-accounting.png",
+        "/crba-admin-dashboard.png",
+        "/crba-fleet.png",
+        "/crba-customers.png",
+        "/crba-damage-reports.png",
+        "/crba-maintenance.png",
+        "/crba-crm-pipeline.png",
+        "/crba-settings.png",
+        "/crba-n8n-workflow.png",
+        "/crba-ghl-new-booking.png",
+        "/crba-ghl-return.png"
       ]
     }
   ];
