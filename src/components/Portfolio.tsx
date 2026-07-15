@@ -70,6 +70,7 @@ export default function Portfolio() {
       screenshots: [
         "/crba-infographic.jpg",
         "/crba-public-page.png",
+        "/crba-admin-dashboard.png",
         "/crba-dashboard.png",
         "/crba-bookings.png",
         "/crba-fleet.png",
